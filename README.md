@@ -1,12 +1,11 @@
-# ParkCore
-A web application that links drivers to the nearest available parking lots
+# BusFeed
 
 ## Data Sets
 
 ## Methodology
 
 ## Credits
-Team 7: ParkCore
+Team 7: BusFeed
 - Lim De Quan
 - Teo Tian Shun Kenneth
 - Jonathan Kevin Chandra
