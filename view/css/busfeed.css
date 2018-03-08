@@ -1,0 +1,46 @@
+@font-face {
+    @font-face {
+    font-family: "Raleway";
+    src: url("Raleway.ttf") format("truetype");
+  }
+}
+
+.container-fluid {
+  height: 100vh;
+  width: 100%;
+  margin:0;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+#header {
+    height: 10%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family:Raleway;
+    margin:0;
+    padding:0;
+}
+
+#content {
+    height: 75%;
+    width: 100%;
+    margin:0;
+    padding:0;
+}
+
+#navigationFooter {
+    height: 15%;
+    width: 100%;
+    margin:0;
+    padding:0;
+}
+
+.navigationFooterButtons {
+    margin:0;
+    padding:0;
+}
