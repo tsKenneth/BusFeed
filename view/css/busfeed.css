@@ -8,7 +8,11 @@
 .container-fluid {
   height: 100vh;
   width: 100%;
-  margin:0;
+  padding:0; !important
+}
+
+.table-responsive {
+    max-height:100%;
 }
 
 #map {
@@ -26,15 +30,20 @@
     padding:0;
 }
 
+h1 {
+    margin:0;
+    padding:0;
+}
+
 #content {
-    height: 75%;
+    height: 80%;
     width: 100%;
     margin:0;
     padding:0;
 }
 
 #navigationFooter {
-    height: 15%;
+    height: 10%;
     width: 100%;
     margin:0;
     padding:0;
@@ -42,5 +51,5 @@
 
 .navigationFooterButtons {
     margin:0;
-    padding:0;
+    padding:10px;
 }
