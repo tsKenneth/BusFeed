@@ -2,14 +2,15 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>BusFeed</title>
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <meta name="mobile-web-app-capable" content="yes">
+
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/busfeed.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    
+
 </head>
 
 <body>
@@ -17,7 +18,7 @@
         <div class="row" id="header">
             <h1>BusFeed</h1>
         </div>
-        
+
         <div class="row" id="content">
             <div class="table-responsive">
                   <table class="table">
@@ -104,42 +105,24 @@
                     </tr>
                   </tbody>
                 </table>
-            </div>    
-        
+            </div>
+
         </div>
-        
+
         <div class="row" id="navigationFooter">
             <div class="col navigationFooterButtons text-center" id="busstop">
-                <img src="css/icons/BusstopInactive.png" class="img-fluid" alt="Busstop" style="height:100%;">
+                <a href="nearbybusstop.html"><img src="css/icons/BusstopInactive.png" class="img-fluid" alt="Busstop" style="height:100%;"></a>
             </div>
             <div class="col navigationFooterButtons text-center" id="route">
-                <img src="css/icons/RouteInactive.png" class="img-fluid" alt="Route" style="height:100%;">
+                <a href="routeplanning.html"><img src="css/icons/RouteInactive.png" class="img-fluid" alt="Route" style="height:100%;"></a>
             </div>
             <div class="col navigationFooterButtons text-center" id="information">
-                <img src="css/icons/InformationInactive.png" class="img-fluid" alt="Information" style="height:100%;">
+                <img src="css/icons/InformationActive.png" class="img-fluid" alt="Information" style="height:100%;">
             </div>
             <div class="col navigationFooterButtons text-center" id="bookmark">
-                <img src="css/icons/BookmarkInactive.png" class="img-fluid" alt="Bookmark" style="height:100%;">
+                <a href="bookmarks.html"><img src="css/icons/BookmarkInactive.png" class="img-fluid" alt="Bookmark" style="height:100%;"></a>
             </div>
         </div>
     </div>
-    
-<script>
-      function initMap() {
-        var ntu = {lat: 1.3480513, lng: 103.6780874};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: ntu
-        });
-        var marker = new google.maps.Marker({
-          position: ntu,
-          map: map
-        });
-      }
-</script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initMap">
-</script>
 </body>
 </html>
-
