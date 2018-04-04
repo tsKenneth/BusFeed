@@ -2,13 +2,27 @@
 
 interface iDatabase_Mapper
 {
-    public function addBusstop($busStopCode, &$busstopInformationArray );
-    public function getBusstop($busStopCode);
-    public function removeBusstop($busStopCode);
-    
-    public function addBusservice($serviceNo, &$busserviceInformationArray );
-    public function getBusservice($serviceNo);
-    public function removeBusservice($serviceNo);
+    public function createBusStopTable();
+    public function createBusServiceTable();
+    public function createBusRouteTable();
+
+    public function addBusstop(array $bsArray);
+    public function addMultBusstop(array $bsMultArray);
+    public function getBusstop(int $busStopCode);
+    public function getAllBusstop();
+    public function removeBusstop(int $busStopCode);
+
+    public function addBusservice(array $bseArray);
+    public function addMultBusservice(array $bseMultArray);
+    public function getBusservice(string $serviceNo, int $direction);
+    public function getAllBusservice();
+    public function removeBusservice(string $serviceNo, int $direction);
+
+
+    public function addBusRouteStop(array $brArray);
+    public function addMultBusRoute(array $brMultArray);
+    public function getBusRoute(string $serviceNo, int $direction);
+    public function removeBusRoute(string $serviceNo, int $direction);
 }
 
 ?>
