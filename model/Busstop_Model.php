@@ -69,26 +69,4 @@ class Busstop extends DomainObjectAbstract{
     }
 }
 
-//Creates a Busstop table and stores all the Busstops from LTA DataMall to database
-function storeBusstops(){
-  $mapper = new SQLite_Mapper();
-
-  $mapper->createBusStopTable();
-  $busStopChunks = APIBusStops();
-  $tempArray = array();
-  $iter = 0;
-  foreach ($busStopChunks as $busStopChunk){
-    $Busstops = (json_decode($busStopChunk))->value;
-    foreach ($Busstops as $Busstop) {
-      $tempArray[$iter][0] = $Busstop->BusStopCode;
-      $tempArray[$iter][1] = $Busstop->RoadName;
-      $tempArray[$iter][2] = $Busstop->Longitude;
-      $tempArray[$iter][3] = $Busstop->Latitude;
-      $tempArray[$iter][4] = $Busstop->Description;
-      $iter = $iter + 1;
-    }
-  }
-  $mapper->addMultBusstop($tempArray);
-}
-
 ?>

@@ -129,31 +129,5 @@ class Busroute extends DomainObjectAbstract {
 
 }
 
-function storeBusRoutes(){
-  $mapper = new SQLite_Mapper();
-  $mapper->createBusRouteTable();
-  $busRouteChunks = APIBusRoutes();
-  $tempArray = array();
-  $iter = 0;
-  foreach ($busRouteChunks as $busRouteChunk){
-    $BusRoutes = (json_decode($busRouteChunk))->value;
-    foreach ($BusRoutes as $BusRoute) {
-      $tempArray[$iter][0] = $BusRoute->ServiceNo;
-      $tempArray[$iter][1] = $BusRoute->Operator;
-      $tempArray[$iter][2] = $BusRoute->Direction;
-      $tempArray[$iter][3] = $BusRoute->StopSequence;
-      $tempArray[$iter][4] = $BusRoute->BusStopCode;
-      $tempArray[$iter][5] = $BusRoute->Distance;
-      $tempArray[$iter][6] = $BusRoute->WD_FirstBus;
-      $tempArray[$iter][7] = $BusRoute->WD_LastBus;
-      $tempArray[$iter][8] = $BusRoute->SAT_FirstBus;
-      $tempArray[$iter][9] = $BusRoute->SAT_LastBus;
-      $tempArray[$iter][10] = $BusRoute->SUN_FirstBus;
-      $tempArray[$iter][11] = $BusRoute->SUN_LastBus;
-      $iter = $iter + 1;
-    }
-  }
-  $mapper->addMultBusRoute($tempArray);
-}
 
 ?>
