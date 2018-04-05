@@ -195,9 +195,6 @@ class SQLite_Mapper implements iDatabase_Mapper
       return;
     }
 
-
-
-
     // CRUD BUSSERVICE ==========================================================================================
 
     // add a new bus service

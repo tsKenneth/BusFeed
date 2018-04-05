@@ -1,8 +1,8 @@
 <?php
 
 
-include('../view/php/apiHandlerLTA.php');
-include('datamapper/sqlite_mapper.php');
+include_once('../view/php/apiHandlerLTA.php');
+include_once('datamapper/sqlite_mapper.php');
 
 
 class Busroute {
@@ -70,7 +70,7 @@ class Busroute {
     }
 
     public function getSUN_FirstBus() {
-
+        
     }
 
     public function getSUN_LastBus() {

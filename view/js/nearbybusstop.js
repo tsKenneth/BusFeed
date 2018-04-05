@@ -20,7 +20,7 @@ function getNearestBusstop(position) {
             });
         }
     };
-    xmlhttp.open("GET", "../controller/nearbybusstop_controller.php?q="
+    xmlhttp.open("GET", "../model/Busstop_Model.php?pos="
         + stringedPosition, true);
     xmlhttp.send();
 }
@@ -44,7 +44,7 @@ function initMap() {
     curLocationMarker = new google.maps.Marker({
         position: initLocation,
         map: map,
-        icon: {url:'http://maps.google.com/mapfiles/kml/shapes/man.png',
+        icon: {url:'https://maps.google.com/mapfiles/kml/shapes/man.png',
         scaledSize: new google.maps.Size(40, 40)}
     });
     getLocation()
