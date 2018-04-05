@@ -1,14 +1,9 @@
 <?php
 
 
-include_once('../view/php/apiHandlerLTA.php');
-include_once('datamapper/sqlite_mapper.php');
+require_once('DomainObjectAbstract.php');
 
-
-
-class Busservice {
-
-
+class Busservice extends DomainObjectAbstract{
 
     // Properties
     private $serviceNo;
@@ -25,85 +20,103 @@ class Busservice {
 
     // Methods
 
-
-
-    // Accessors and Mutators
-
     // Returns all information in array format
     public function getInformationArray() {
 
     }
 
-    public function getSeviceNo() {
+    // Mutators
 
+    public function setServiceNo($info){
+      $this->serviceNo = $info;
+    }
+
+    public function setOperator($info){
+      $this->operator = $info;
+    }
+
+    public function setDirection($info){
+      $this->direction = $info;
+    }
+
+    public function setCategory($info){
+      $this->category = $info;
+    }
+
+    public function setOriginCode($info){
+      $this->originCode = $info;
+    }
+
+    public function setDestinationCode($info){
+      $this->destinationCode = $info;
+    }
+
+    public function setAMP($info){
+      $this->AM_Peak_Freq = $info;
+    }
+
+    public function setAMO($info){
+      $this->AM_Offpeak_Freq = $info;
+    }
+
+    public function setPMP($info){
+      $this->PM_Peak_Freq = $info;
+    }
+
+    public function setPMO($info){
+      $this->PM_Offpeak_Freq = $info;
+    }
+
+    public function setLoopDescription($info){
+      $this->loopDesc = $info;
+    }
+
+
+    // Accessors
+
+    public function getServiceNo() {
+      return $this->serviceNo;
     }
 
     public function getOperator() {
-
+      return $this->operator;
     }
 
     public function getDirection() {
-
+      return $this->direction;
     }
 
     public function getCategory() {
-
+      return $this->category;
     }
 
     public function getOriginCode() {
-
+      return $this->originCode;
     }
 
     public function getDestinationCode() {
-
+      return $this->destinationCode;
     }
 
-    public function getAMDestinationCode() {
-
+    public function getAM_Peak_Freq() {
+      return $this->AM_Peak_Freq;
     }
 
     public function getAM_Offpeak_Freq() {
-
+      return $this->AM_Offpeak_Freq;
     }
 
     public function getPM_Peak_Freq() {
-
+      return $this->PM_Peak_Freq;
     }
 
     public function getPM_Offpeak_Freq() {
-
+      return $this->PM_Offpeak_Freq;
     }
 
     public function getLoopDesc() {
-
+      return $this->loopDesc;
     }
-}
-
-//Creates a Busstop table and stores all the Busstops from LTA DataMall to database
-function storeBusServices(){
-  $mapper = new SQLite_Mapper();
-  $mapper->createBusServiceTable();
-  $busServiceChunks = APIBusService();
-  $tempArray = array();
-  $iter = 0;
-  foreach ($busServiceChunks as $busServiceChunk){
-    $BusServices = (json_decode($busServiceChunk))->value;
-    foreach ($BusServices as $BusService) {
-      $tempArray[$iter][0] = $BusService->ServiceNo;
-      $tempArray[$iter][1] = $BusService->Operator;
-      $tempArray[$iter][2] = $BusService->Direction;
-      $tempArray[$iter][3] = $BusService->Category;
-      $tempArray[$iter][4] = $BusService->OriginCode;
-      $tempArray[$iter][5] = $BusService->DestinationCode;
-      $tempArray[$iter][6] = $BusService->AM_Peak_Freq;
-      $tempArray[$iter][7] = $BusService->AM_Offpeak_Freq;
-      $tempArray[$iter][8] = $BusService->PM_Peak_Freq;
-      $tempArray[$iter][9] = $BusService->PM_Offpeak_Freq;
-      $tempArray[$iter][10] = $BusService->LoopDesc;
-      $iter = $iter + 1;
-    }
-  }
-  $mapper->addMultBusservice($tempArray);
 }
 
 ?>
