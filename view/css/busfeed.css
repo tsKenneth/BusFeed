@@ -42,6 +42,27 @@ h1 {
     padding:0;
 }
 
+.tab-content {
+    height: 85%;
+    width: 100%;
+    margin:0;
+    padding:0;
+}
+
+#filterbox {
+    height: 10%;
+    width: 100%;
+    margin:0;
+    padding:0;
+}
+
+#pills-tab {
+    height: 5%;
+    width: 100%;
+    margin:0;
+    padding:0;
+}
+
 #navigationFooter {
     height: 10%;
     width: 100%;
