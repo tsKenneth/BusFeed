@@ -2,6 +2,7 @@
 
 
 require_once('DomainObjectAbstract.php');
+require_once('Busarrival_Model.php');
 
 
 class Busroute extends DomainObjectAbstract {
@@ -20,6 +21,7 @@ class Busroute extends DomainObjectAbstract {
     private $SUN_FirstBus;
     private $SUN_LastBus;
 
+
     // Methods
 
     // Returns all information in array format
@@ -27,6 +29,41 @@ class Busroute extends DomainObjectAbstract {
 
     }
 
+
+    // Returns a size 3 array of Bus Arrival objects with the following format (NextBus, NextBus2, NextBus3)
+    public function getArrivalTimingsAPI(){
+      $sNo = $this->getServiceNo();
+      $bscode = $this->getBusStopCode();
+
+      $arrival1 = new Busarrival();
+      $arrival2 = new Busarrival();
+      $arrival3 = new Busarrival();
+
+      $json = APIBusArrival($bscode,$sNo);
+
+      $contentArr = (json_decode($json))->Services;
+      $content = $contentArr[0];
+      print_r($content);
+
+      $arrivalArr = array($arrival1,$arrival2,$arrival3);
+      $nextBusArr = array('NextBus', 'NextBus2', 'NextBus3');
+      $iter = 0;
+
+      foreach($nextBusArr as $nextBus){
+        $arrivalArr[$iter]->setOriginCode($content->$nextBus->OriginCode);
+        $arrivalArr[$iter]->setDestinationCode($content->$nextBus->DestinationCode);
+        $arrivalArr[$iter]->setEstimatedArrival($content->$nextBus->EstimatedArrival);
+        $arrivalArr[$iter]->setLatitude($content->$nextBus->Latitude);
+        $arrivalArr[$iter]->setLongitude($content->$nextBus->Longitude);
+        $arrivalArr[$iter]->setVisitNumber($content->$nextBus->VisitNumber);
+        $arrivalArr[$iter]->setLoad($content->$nextBus->Load);
+        $arrivalArr[$iter]->setFeature($content->$nextBus->Feature);
+        $arrivalArr[$iter]->setType($content->$nextBus->Type);
+        $iter = $iter + 1;
+      }
+
+      return $arrivalArr;
+    }
 
 
     //Mutators
@@ -78,6 +115,18 @@ class Busroute extends DomainObjectAbstract {
       $this->SUN_LastBus = $info;
     }
 
+    public function setNextBusArrival($info){
+      $this->nextBusArrival = $info;
+    }
+
+    public function setNextBusArrival2($info){
+      $this->nextBusArrival2 = $info;
+    }
+
+    public function setNextBusArrival3($info){
+      $this->nextBusArrival3 = $info;
+    }
+
     //Accessors
     public function getServiceNo() {
       return $this->serviceNo;
@@ -125,6 +174,18 @@ class Busroute extends DomainObjectAbstract {
 
     public function getSUN_LastBus() {
       return $this->SUN_LastBus;
+    }
+
+    public function getNextBusArrival(){
+      return $this->nextBusArrival;
+    }
+
+    public function getNextBusArrival2(){
+      return $this->nextBusArrival2;
+    }
+
+    public function getNextBusArrival3(){
+      return $this->nextBusArrival3;
     }
 
 }
