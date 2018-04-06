@@ -25,12 +25,12 @@ $('#informationModal').on('show.bs.modal', function(modal) {
                     <b>Latitude:</b> ${busstopArray[i].latitude} <br />
                     <b>Longitude:</b> ${busstopArray[i].longitude} <br />
                 </p>
+                <hr>
+                <b>Busses</b>
                 <button type="button" class="btn btn-success">Add to bookmarks</button>
                 `;
             }
         }
-
-
     } else if(modalType == "busservice") {
         var serviceno = modal.relatedTarget.dataset.serviceno;
         var direction = modal.relatedTarget.dataset.direction;
@@ -57,6 +57,15 @@ $('#informationModal').on('show.bs.modal', function(modal) {
         }
     }
 });
+
+function updateBusstopBusArrivalTiming() {
+    $.ajax({
+        url: '../model/requestHandler.php',
+        data: "function=getAllBusstopJSON",
+        contentType: "application/json; charset=utf-8",
+        success: updateBusstopResultsTable
+    });
+}
 
 function retrieveBusstopList() {
     $.ajax({

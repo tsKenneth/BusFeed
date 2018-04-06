@@ -1,6 +1,7 @@
 <?php
 require_once("datamapper\sqlite\BusstopMapper_sqlite.php");
 require_once("datamapper\sqlite\BusserviceMapper_sqlite.php");
+require_once("datamapper\sqlite\BusrouteMapper_sqlite.php");
 
 if(isset($_GET['function'])) {
     if($_GET['function'] == 'getAllBusstopJSON') {

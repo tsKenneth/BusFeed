@@ -22,25 +22,31 @@ function initRouteRenderer() {
 }
 
 function initPlacesAutoComplete() {
-    var input = document.getElementById('destinationBox');
+    var input = document.getElementById('filterbox');
     var options = {
         componentRestrictions: {country: 'sg'}
     };
     autocomplete = new google.maps.places.Autocomplete(input, options);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        calculateRoute({lat:place.geometry.location.lat(),
+            lng:place.geometry.location.lng()});
+    });
 }
 
-function calculateRoute() {
-  var start = new google.maps.LatLng(userCurPos.lat, userCurPos.lng);
-  var end = document.getElementById('destinationBox').value;
-  var request = {
-      origin: start,
-      destination: end,
-      travelMode: 'TRANSIT'
-  };
-  directionsService.route(request, function(result, status) {
-      if (status == 'OK') {
-          directionsDisplay.setDirections(result);
-      }
+function calculateRoute(end) {
+    var start = new google.maps.LatLng(userCurPos.lat, userCurPos.lng);
+    var request = {
+        origin: start,
+        destination: end,
+        travelMode: 'TRANSIT'
+    };
+    directionsService.route(request, function(result, status) {
+        if (status == 'OK') {
+            directionsDisplay.setDirections(result);
+        } else {
+            console.log(status);
+        }
   });
 }
 
