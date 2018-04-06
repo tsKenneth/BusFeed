@@ -24,6 +24,23 @@ class Busroute extends DomainObjectAbstract {
 
     // Methods
 
+    public function JsonSerialize(){
+      return [
+            'serviceNo' => $this->getServiceNo(),
+            'operator' => $this->getOperator(),
+            'direction' => $this->getDirection(),
+            'stopSequence' => $this->getStopSequence(),
+            'busStopCode' => $this->getBusStopCode(),
+            'distance' => $this->getDistance(),
+            'WD_FirstBus' => $this->getWD_FirstBus(),
+            'WD_LastBus' => $this->getWD_LastBus(),
+            'SAT_FirstBus' => $this->getSAT_FirstBus(),
+            'SAT_LastBus' => $this->getSAT_LastBus(),
+            'SUN_FirstBus' => $this->getSUN_FirstBus(),
+            'SUN_LastBus' => $this->getSUN_LastBus()
+        ];
+    }
+
     // Returns all information in array format
     public function getInformationArray() {
 
@@ -59,6 +76,7 @@ class Busroute extends DomainObjectAbstract {
         $arrivalArr[$iter]->setLoad($content->$nextBus->Load);
         $arrivalArr[$iter]->setFeature($content->$nextBus->Feature);
         $arrivalArr[$iter]->setType($content->$nextBus->Type);
+        $arrivalArr[$iter]->setArrivalMinute($content->$nextBus->EstimatedArrival);
         $iter = $iter + 1;
       }
 

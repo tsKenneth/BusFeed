@@ -23,16 +23,26 @@ class Busarrival extends DomainObjectAbstract{
   private $feature;
   // can either be SD (Single Deck), DD (Double Deck), BD (Bendy)
   private $type;
+  // next arrival timing in terms of minutes compared to current time
+  private $arrivalMinute;
 
   //Methods
 
-  // gets the arrival timing in terms of minute
-  public function getArrivalMinute(){
-    $currTime = time();
-    $arrTime = strtotime($this->getEstimatedArrival());
-    $minuteDiff = round(($arrTime-$currTime)/60);
-    return $minuteDiff;
+  public function JsonSerialize(){
+    return [
+          'originCode' => $this->getOriginCode(),
+          'destinationCode' => $this->getDestinationCode(),
+          'estimatedArrival' => $this->getEstimatedArrival(),
+          'latitude' => $this->getLatitude(),
+          'longitude' => $this->getLongitude(),
+          'visitNumber' => $this->getVisitNumber(),
+          'load' => $this->getLoad(),
+          'feature' => $this->getFeature(),
+          'type' => $this->getType(),
+          'arrivalMinute' => $this->getArrivalMinute()
+      ];
   }
+
 
   //Mutators
   public function setOriginCode($info){
@@ -61,6 +71,12 @@ class Busarrival extends DomainObjectAbstract{
   }
   public function setType($info){
     $this->type = $info;
+  }
+  public function setArrivalMinute($info){
+    $currTime = time();
+    $arrTime = strtotime($this->getEstimatedArrival());
+    $minuteDiff = round(($arrTime-$currTime)/60);
+    $this->arrivalMinute = $minuteDiff;
   }
   //Accessors
 
@@ -91,7 +107,9 @@ class Busarrival extends DomainObjectAbstract{
   public function getType(){
     return $this->type;
   }
-
+  public function getArrivalMinute(){
+    return $this->arrivalMinute;
+  }
 
 
 

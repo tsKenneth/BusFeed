@@ -12,6 +12,16 @@ class Busstop extends DomainObjectAbstract{
     private $longitude;
     // Methods
 
+    public function JsonSerialize(){
+      return [
+            'busStopCode' => $this->getBusStopCode(),
+            'roadName' => $this->getRoadName(),
+            'description' => $this->getDescription(),
+            'latitude' => $this->getLatitude(),
+            'longitude' => $this->getLongitude()
+        ];
+    }
+
     // Returns all information in array format
     public function getInformationArray() {
 
