@@ -8,6 +8,7 @@ require_once(__DIR__.'/../view/php/apiHandlerLTA.php');
 
 //TEST BUS STOP
 $mapper = new BusstopMapper_sqlite();
+
 //$mapper->createTable();
 //$mapper->storeFromAPI();
 //$result = $mapper->getByBusStopCode(5651);
@@ -20,10 +21,10 @@ $mapper = new BusstopMapper_sqlite();
 //}
 
 // TEST BUS SERVICE
-//$mapper2 = new BusserviceMapper_sqlite();
+$mapper2 = new BusserviceMapper_sqlite();
 //$mapper2->createTable();
 //$mapper2->storeFromAPI();
-//$result2 = $mapper2->getByServiceNoDirection(912,1);
+$result2 = $mapper2->getByServiceNoDirection(912,1);
 //echo($result2->getLoopDesc());
 //echo('<br>');
 
@@ -54,7 +55,8 @@ echo(($result5[2])->getArrivalMinute());
 echo('<br>');
 echo(gettype(($result5[0])->getArrivalMinute()));
 
-
+echo(json_encode($result2));
+echo(json_encode($result5));
 
 //GET NEAREST TEST
 

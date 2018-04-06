@@ -4,7 +4,7 @@
 
 
 
-abstract class DomainObjectAbstract
+abstract class DomainObjectAbstract implements JsonSerializable
 {
     protected $_id = null;
 
@@ -20,4 +20,6 @@ abstract class DomainObjectAbstract
         }
         return $this->_id = $id;
     }
+
+    abstract function JsonSerialize();
 }

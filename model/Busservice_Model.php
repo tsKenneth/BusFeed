@@ -19,6 +19,21 @@ class Busservice extends DomainObjectAbstract{
     private $loopDesc;
 
     // Methods
+    public function JsonSerialize(){
+      return [
+            'serviceNo' => $this->getServiceNo(),
+            'operator' => $this->getOperator(),
+            'direction' => $this->getDirection(),
+            'category' => $this->getCategory(),
+            'originCode' => $this->getOriginCode(),
+            'destinationCode' => $this->getDestinationCode(),
+            'AM_Peak_Freq' => $this->getAM_Peak_Freq(),
+            'AM_Offpeak_Freq' => $this->getAM_Offpeak_Freq(),
+            'PM_Peak_Freq' => $this->getPM_Peak_Freq(),
+            'PM_Offpeak_Freq' => $this->getPM_Offpeak_Freq(),
+            'loopDesc' => $this->getLoopDesc(),
+        ];
+    }
 
     // Returns all information in array format
     public function getInformationArray() {
