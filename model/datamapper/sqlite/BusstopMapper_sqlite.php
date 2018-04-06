@@ -116,6 +116,45 @@ class BusstopMapper_sqlite extends MapperAbstract_sqlite{
       return $bsArr;
     }
 
+    // gets all nearest bus stops based on center long and center lat coordinates. max dist is in km
+    // returns an array of Bus Stop objects
+    public function getNearestBusstop($cLong,$cLat,$maxdist){
+      $db = new DB();
+      $bsArr = array();
+      $iter = 0;
+
+      $db->createFunction('haversine',   function($long,$lat,$cLong,$cLat){
+                                            $deltaLat = deg2rad($lat - $cLat);
+                                            $deltaLong = deg2rad($long - $cLong);
+                                            $a = sin($deltaLat / 2) * sin($deltaLat / 2) +
+                                               cos(deg2rad($cLat)) * cos(deg2rad($lat)) *
+                                               sin($deltaLong / 2) * sin($deltaLong / 2);
+                                            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+                                            return 6371 * $c;
+                                          }, 4);
+      $sql = "SELECT *,
+              haversine(longitude, latitude, :cLong, :cLat) AS distance
+              FROM busstops
+              WHERE distance < :maxdist;";
+      $stmt = $db->prepare($sql);
+      $stmt->bindValue(':cLong', $cLong, SQLITE3_FLOAT);
+      $stmt->bindValue(':cLat', $cLat, SQLITE3_FLOAT);
+      $stmt->bindValue(':maxdist', $maxdist, SQLITE3_FLOAT);
+      $res = $stmt->execute();
+
+      $rowArray = array();
+      while($row = $res->fetchArray(SQLITE3_ASSOC)){
+        array_push($rowArray, $row);
+      }
+      foreach($rowArray as $data){
+        $bsArr[$iter] = $this->create($data);
+        $iter = $iter + 1;
+      }
+
+      $db->close();
+      return $bsArr;
+    }
+
     // functions below can only be called by this class
 
     protected function _create(){
