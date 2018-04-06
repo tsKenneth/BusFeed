@@ -1,8 +1,6 @@
 <?php
-
 require_once('MapperAbstract_sqlite.php');
 require_once(__DIR__.'/../../Busstop_Model.php');
-
 
 class BusstopMapper_sqlite extends MapperAbstract_sqlite{
 

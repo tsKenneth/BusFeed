@@ -1,8 +1,3 @@
-
-<!DOCTYPE html>
-<html>
-<body>
-
 <?php
 
 require __DIR__."/vendor/autoload.php";
@@ -127,6 +122,3 @@ function APIBusStops(){
 }
 
 ?>
-
-</body>
-</html>
