@@ -16,34 +16,45 @@
 <body>
     <div class="container-fluid">
         <div class="row" id="header">
-            <h1>BusFeed</h1>
+            <img src="img/logo.png" class="img-fluid" alt="logo">
+            <h1>&nbspBusFeed</h1>
         </div>
 
         <div class="row" id="content">
-            <input type="text" id="filterbox" class="form-control"
-            placeholder="Destination...">
-            <div id="map2"></div>
+            <div id="map"></div>
         </div>
 
         <div class="row" id="navigationFooter">
             <div class="col navigationFooterButtons text-center" id="busstop">
-                <a href="nearbybusstop.html"><img src="css/icons/BusstopInactive.png" class="img-fluid" alt="Busstop" style="height:100%;"></a>
+                <a href="nearbybusstop.html"><img src="css/icons/Busstop.png" class="img-fluid" alt="Busstop" style="height:100%;"></a>
             </div>
-            <div class="col navigationFooterButtons text-center" id="route">
-                <img src="css/icons/RouteActive.png" class="img-fluid" alt="Route" style="height:100%;">
+            <div class="col navigationFooterButtons text-center" id="activeNav">
+                <a href="routeplanning.html"><img src="css/icons/Route.png" class="img-fluid" alt="Route" style="height:100%;"></a>
             </div>
             <div class="col navigationFooterButtons text-center" id="information">
-                <a href="information.html"><img src="css/icons/InformationInactive.png" class="img-fluid" alt="Information" style="height:100%;"></a>
+                <a href="information.html"><img src="css/icons/Information.png" class="img-fluid" alt="Information" style="height:100%;"></a>
             </div>
             <div class="col navigationFooterButtons text-center" id="bookmark">
-                <a href="bookmarks.html"><img src="css/icons/BookmarkInactive.png" class="img-fluid" alt="Bookmark" style="height:100%;"></a>
+                <a href="bookmarks.html"><img src="css/icons/Bookmark.png" class="img-fluid" alt="Bookmark" style="height:100%;"></a>
             </div>
         </div>
     </div>
 
-<script src="js/routeplanning.js"></script>
+<script>
+      function initMap() {
+        var ntu = {lat: 1.3480513, lng: 103.6780874};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: ntu
+        });
+        var marker = new google.maps.Marker({
+          position: ntu,
+          map: map
+        });
+      }
+</script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initPage&libraries=places">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initMap">
 </script>
 </body>
 </html>
