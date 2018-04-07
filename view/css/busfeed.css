@@ -11,17 +11,8 @@
   padding:0; !important
 }
 
-.table-responsive {
-    max-height:100%;
-}
-
 #map {
     height: 100%;
-    width: 100%;
-}
-
-#map2 {
-    height: 90%;
     width: 100%;
 }
 
@@ -30,12 +21,37 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    font-family:Raleway;
+    margin:0;
+    padding:0;
+    background-color:#CF5C3F;
+    opacity: 50;
+    color: white;
+    text-shadow: 2px 2px red;
+}
+
+#header img {
+    height: 80%;
+    width: auto;
+
+}
+
+h1 {
     margin:0;
     padding:0;
 }
 
-h1 {
+#content {
+    height: 82vh;
+    width: 100%;
+    margin:0;
+    padding:0;
+    background-color: #343a40;
+    color: white;
+}
+
+.tab-content {
+    height: 82%;
+    width: 100%;
     margin:0;
     padding:0;
 }
@@ -54,32 +70,63 @@ h1 {
     padding:0;
 }
 
-#content {
-    height: 80%;
-    width: 100%;
-    margin:0;
-    padding:0;
-}
-
-.tab-content {
-    height: 85%;
-    width: 100%;
-    margin:0;
-    padding:0;
-}
-
-.tab-pane {
-    height:100%;
-}
 
 #navigationFooter {
-    height: 10%;
+    height: 8%;
     width: 100%;
     margin:0;
     padding:0;
+    background-color: #CF5C3F;
 }
 
-.navigationFooterButtons {
-    margin:0;
-    padding:10px;
+
+#navigationFooter img{
+    padding: 7px;
+    height: 100%;
+    width: auto;
+}
+
+#activeNav {
+    background: #1d2124;
+    border-radius: 5px;
+    height: 7vh;
+    margin: 0.5vh 5px 0px 5px;
+    opacity: 0.8;
+}
+
+.table-responsive {
+    max-height:68vh;
+    background-color: #343a40;
+}
+
+.table td{
+    vertical-align: middle;
+
+}
+.table tr{
+    vertical-align: middle;
+}
+.table thead th{
+    vertical-align: middle;
+}
+
+.table tbody th {
+    text-align: left;
+}
+
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    opacity: 0.5;
+    background-color: black;
+    color: white;
+}
+
+.nav-pills .nav-link{
+    color:black;
+    font-weight: bold;
+    background-color: #d3d3d3;
+}
+
+.table tbody th{
+    vertical-align: middle;
 }

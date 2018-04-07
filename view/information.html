@@ -10,33 +10,23 @@
     <link rel="stylesheet" href="css/busfeed.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/logo.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/logo.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/logo.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/logo.png" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/busfeed.css">
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row" id="header">
-            <h1>BusFeed</h1>
+            <img src="img/logo.png" class="img-fluid" alt="logo">
+            <h1>&nbspBusFeed</h1>
         </div>
 
         <div class="container-fluid" id="content">
-            <div id="informationModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Information</h4>
-                    </div>
-                    <div id="modalText" class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default"
-                            data-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
 
             <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab"
             role="tablist">
@@ -61,6 +51,7 @@
                 <div class="tab-pane fade show active"
                 id="busservice" role="tabpanel"
                 aria-labelledby="pills-home-tab">
+                Allahu Akbar
                 </div>
                 <div class="tab-pane fade"
                 id="busstop" role="tabpanel"
@@ -71,16 +62,16 @@
 
         <div class="row" id="navigationFooter">
             <div class="col navigationFooterButtons text-center" id="busstop">
-                <a href="nearbybusstop.html"><img src="css/icons/BusstopInactive.png" class="img-fluid" alt="Busstop" style="height:100%;"></a>
+                <a href="nearbybusstop.html"><img src="css/icons/Busstop.png" class="img-fluid" alt="Busstop"</a>
             </div>
             <div class="col navigationFooterButtons text-center" id="route">
-                <a href="routeplanning.html"><img src="css/icons/RouteInactive.png" class="img-fluid" alt="Route" style="height:100%;"></a>
+                <a href="routeplanning.html"><img src="css/icons/Route.png" class="img-fluid" alt="Route"></a>
             </div>
-            <div class="col navigationFooterButtons text-center" id="information">
-                <img src="css/icons/InformationActive.png" class="img-fluid" alt="Information" style="height:100%;">
+            <div class="col navigationFooterButtons text-center" id="activeNav">
+                <a class="active" href="information.html"><img src="css/icons/Information.png" class="img-fluid" alt="Information"></a>
             </div>
             <div class="col navigationFooterButtons text-center" id="bookmark">
-                <a href="bookmarks.html"><img src="css/icons/BookmarkInactive.png" class="img-fluid" alt="Bookmark" style="height:100%;"></a>
+                <a href="bookmarks.html"><img src="css/icons/Bookmark.png" class="img-fluid" alt="Bookmark"></a>
             </div>
         </div>
     </div>
