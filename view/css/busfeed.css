@@ -24,7 +24,6 @@
     margin:0;
     padding:0;
     background-color:#CF5C3F;
-    opacity: 50;
     color: white;
     text-shadow: 2px 2px red;
 }
@@ -72,11 +71,12 @@ h1 {
 
 
 #navigationFooter {
-    height: 8%;
+    height: 8vh;
     width: 100%;
     margin:0;
     padding:0;
     background-color: #CF5C3F;
+    z-index: 1;
 }
 
 
@@ -87,15 +87,14 @@ h1 {
 }
 
 #activeNav {
-    background: #1d2124;
+    background: #542a23;
     border-radius: 5px;
-    height: 7vh;
-    margin: 0.5vh 5px 0px 5px;
-    opacity: 0.8;
+    height: 100%;
+    opacity: 0.5;
 }
 
 .table-responsive {
-    max-height:76vh;
+    max-height:78vh;
     background-color: #343a40;
 }
 
@@ -113,6 +112,9 @@ h1 {
 .table tbody th {
     text-align: left;
 }
+.nav-link {
+    height: 6.8vh;
+}
 
 .nav-fill .nav-item {
    background-color: #CF5C3F;
@@ -120,12 +122,11 @@ h1 {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-
-    margin: 0.5vh 5px 0.5vh 5px;
     padding: 0;
-    background-color: #1d2124;
+    background-color: #542a23;
     color: white;
-    height: 5.8vh;
+    height: 6.8vh;
+    opacity: 0.5;
 }
 
 
@@ -135,28 +136,9 @@ h1 {
     color:white;
     font-weight: bold;
     background-color: #CF5C3F;
-    opacity: 0.8;
 }
 
 .table tbody th{
     vertical-align: middle;
 }
 
-#logo {
-    position: fixed;
-    bottom: 0.1vh;
-    right: 45vw;
-    width: 50px;
-    height:auto;
-    width: auto;
-    max-height: 50px;
-    max-width: 50px;
-}
-
-#busfeedword {
-    position: fixed;
-    bottom: 9vh;
-    right: 10px;
-    height:2vh;
-    width: auto;
-}
