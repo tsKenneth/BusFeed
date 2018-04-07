@@ -41,7 +41,7 @@ h1 {
 }
 
 #content {
-    height: 82vh;
+    height: 92vh;
     width: 100%;
     margin:0;
     padding:0;
@@ -95,7 +95,7 @@ h1 {
 }
 
 .table-responsive {
-    max-height:68vh;
+    max-height:76vh;
     background-color: #343a40;
 }
 
@@ -114,19 +114,49 @@ h1 {
     text-align: left;
 }
 
-
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    opacity: 0.5;
-    background-color: black;
-    color: white;
+.nav-fill .nav-item {
+   background-color: #CF5C3F;
+    height: 6.8vh;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+
+    margin: 0.5vh 5px 0.5vh 5px;
+    padding: 0;
+    background-color: #1d2124;
+    color: white;
+    height: 5.8vh;
+}
+
+
 .nav-pills .nav-link{
-    color:black;
+    margin:0;
+    padding: 0;
+    color:white;
     font-weight: bold;
-    background-color: #d3d3d3;
+    background-color: #CF5C3F;
+    opacity: 0.8;
 }
 
 .table tbody th{
     vertical-align: middle;
+}
+
+#logo {
+    position: fixed;
+    bottom: 0.1vh;
+    right: 45vw;
+    width: 50px;
+    height:auto;
+    width: auto;
+    max-height: 50px;
+    max-width: 50px;
+}
+
+#busfeedword {
+    position: fixed;
+    bottom: 9vh;
+    right: 10px;
+    height:2vh;
+    width: auto;
 }
