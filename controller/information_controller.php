@@ -2,7 +2,8 @@
 interface iInformation_Controller
 {
     // Returns an array of information
-    public function filter(string $filterText);
+    public static function retrieveAllInfo();
+    public static function retrieveInfo(string $specifier);
 }
 
 ?>

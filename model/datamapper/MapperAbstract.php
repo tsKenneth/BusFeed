@@ -1,6 +1,4 @@
 <?php
-
-
 abstract class MapperAbstract{
 
     abstract public function create(array $data = null);
@@ -13,8 +11,4 @@ abstract class MapperAbstract{
     abstract protected function _update(DomainObjectAbstract $obj);
     abstract protected function _delete(DomainObjectAbstract $obj);
 }
-
-
-
-
 ?>

@@ -1,7 +1,6 @@
 <?php
 require_once('DomainObjectAbstract.php');
 
-
 /**
  * Class that stores the information of the next bus arrival timing
  */
@@ -107,14 +106,5 @@ class Busarrival extends DomainObjectAbstract{
   public function getArrivalMinute(){
     return $this->arrivalMinute;
   }
-
-
-
-
-
 }
-
-
-
-
 ?>

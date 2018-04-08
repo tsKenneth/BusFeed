@@ -1,7 +1,4 @@
 <?php
-
-
-
 require_once('MapperAbstract_sqlite.php');
 require_once(__DIR__.'/../../Busservice_Model.php');
 
@@ -9,7 +6,6 @@ require_once(__DIR__.'/../../Busservice_Model.php');
 class BusserviceMapper_sqlite extends MapperAbstract_sqlite{
 
     public function __construct(){
-
     }
 
     // Creates new Bus Service Table

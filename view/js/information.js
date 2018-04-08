@@ -58,19 +58,10 @@ $('#informationModal').on('show.bs.modal', function(modal) {
     }
 });
 
-function updateBusstopBusArrivalTiming() {
-    $.ajax({
-        url: '../model/requestHandler.php',
-        data: "function=getAllBusstopJSON",
-        contentType: "application/json; charset=utf-8",
-        success: updateBusstopResultsTable
-    });
-}
-
 function retrieveBusstopList() {
     $.ajax({
-        url: '../model/requestHandler.php',
-        data: "function=getAllBusstopJSON",
+        url: '../controller/information_busstop_controller.php',
+        data: "function=retrieveAllInfo",
         contentType: "application/json; charset=utf-8",
         success: updateBusstopResultsTable
     });
@@ -78,7 +69,7 @@ function retrieveBusstopList() {
 
 function retrieveBusserviceList() {
     $.ajax({
-        url: '../model/requestHandler.php',
+        url: '../controller/information_busservice_controller.php',
         data: "function=getAllBusserviceJSON",
         contentType: "application/json; charset=utf-8",
         success: updateBusserviceResultsTable

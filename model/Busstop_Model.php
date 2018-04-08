@@ -1,6 +1,6 @@
 <?php
-
 require_once('DomainObjectAbstract.php');
+require_once('datamapper/sqlite/BusstopMapper_sqlite.php');
 
 class Busstop extends DomainObjectAbstract{
 
@@ -10,8 +10,23 @@ class Busstop extends DomainObjectAbstract{
     private $description;
     private $latitude;
     private $longitude;
-    // Methods
 
+    public function retrieveBusstop($busStopCode) {
+        $mapper = new BusstopMapper_sqlite();
+        return $mapper->getByBusStopCode($busStopCode);
+    }
+
+    public function retrieveAllBusstops() {
+        $mapper = new BusstopMapper_sqlite();
+        return $mapper->getAllBusstop();
+    }
+
+    public function retrieveNearbyBusstops($cLong,$cLat,$maxdist) {
+        $mapper = new BusstopMapper_sqlite();
+        return $mapper->getNearestBusstop($cLong,$cLat,$maxdist);
+    }
+
+    // Methods
     public function JsonSerialize(){
       return [
             'busStopCode' => $this->getBusStopCode(),
@@ -21,18 +36,6 @@ class Busstop extends DomainObjectAbstract{
             'longitude' => $this->getLongitude()
         ];
     }
-
-    // Returns all information in array format
-    public function getInformationArray() {
-
-    }
-
-    // Returns Coordinates in array format
-    public function getCoordinatesArray() {
-
-    }
-
-
     // Mutators
 
     public function setBusstopCode($info){

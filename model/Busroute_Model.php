@@ -1,6 +1,7 @@
 <?php
 require_once('DomainObjectAbstract.php');
 require_once('Busarrival_Model.php');
+require_once('datamapper/sqlite/BusrouteMapper_sqlite.php');
 require_once('../view/php/apiHandlerLTA.php');
 
 
@@ -20,6 +21,20 @@ class Busroute extends DomainObjectAbstract {
     private $SUN_FirstBus;
     private $SUN_LastBus;
 
+    public static function retrieveBusroute($serviceNo, $direction, $busStopCode) {
+        $mapper = new BusrouteMapper_sqlite();
+        return $mapper->getRouteStop($serviceNo, $direction, $busStopCode);
+    }
+
+    public static function retrieveRouteFromBusstop($busStopCode) {
+        $mapper = new BusrouteMapper_sqlite();
+        return $mapper->getRoutesFromBusStop($busStopCode);
+    }
+
+    public static function retrieveAllBusRoute($serviceNo, $direction) {
+        $mapper = new BusrouteMapper_sqlite();
+        return $mapper->getRouteFull($serviceNo, $direction);
+    }
 
     // Methods
 
@@ -40,12 +55,6 @@ class Busroute extends DomainObjectAbstract {
         ];
     }
 
-    // Returns all information in array format
-    public function getInformationArray() {
-
-    }
-
-
     // Returns a size 3 array of Bus Arrival objects with the following format (NextBus, NextBus2, NextBus3)
     public function getArrivalTimingsAPI(){
       $sNo = $this->getServiceNo();
@@ -59,7 +68,7 @@ class Busroute extends DomainObjectAbstract {
 
       $contentArr = (json_decode($json))->Services;
       $content = $contentArr[0];
-      
+
       $arrivalArr = array($arrival1,$arrival2,$arrival3);
       $nextBusArr = array('NextBus', 'NextBus2', 'NextBus3');
       $iter = 0;
@@ -203,8 +212,5 @@ class Busroute extends DomainObjectAbstract {
     public function getNextBusArrival3(){
       return $this->nextBusArrival3;
     }
-
 }
-
-
 ?>

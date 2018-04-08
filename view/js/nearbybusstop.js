@@ -6,15 +6,15 @@ var curUserLocation;
 
 function initPage() {
     initMap();
-    getNearestBusstops();
+    getNearbyBusstops();
 }
 
 // Busstop Arrival Time Section ===============================================
 function getBusroutesAtBusstop(busstopCode) {
     var xmlhttp = new XMLHttpRequest();
     $.ajax({
-        url: '../model/requestHandler.php',
-        data: {function:"getRoutesAtBusstop",
+        url: '../controller/nearbybusstop_controller.php',
+        data: {function:"retrieveRoutesAtBusstop",
                 busstopcode: busstopCode},
         contentType: "application/json; charset=utf-8",
         success: showBusArrivalModal
@@ -52,8 +52,8 @@ function showBusArrivalModal(results, status, xhr) {
 function getBusArrivalTiming(busStopCode, serviceNo, direction) {
     var xmlhttp = new XMLHttpRequest();
     $.ajax({
-        url: '../model/requestHandler.php',
-        data: {function:"getBusArrivalTiming",
+        url: '../controller/nearbybusstop_controller.php',
+        data: {function:"retrieveBusArrivalTiming",
                 busstopcode: busStopCode,
                 serviceno: serviceNo,
                 direction: direction},
@@ -78,11 +78,11 @@ function updateTimingModal(results, status, xhr) {
 }
 
 // Busstop Markers Section  ===================================================
-function getNearestBusstops() {
+function getNearbyBusstops() {
     var xmlhttp = new XMLHttpRequest();
     $.ajax({
-        url: '../model/requestHandler.php',
-        data: {function:"getNearbyBusstop",
+        url: '../controller/nearbybusstop_controller.php',
+        data: {function:"retrieveNearbyBusstop",
                 pos: JSON.stringify(curUserLocation)},
         contentType: "application/json; charset=utf-8",
         success: markNearbyBusstops
@@ -90,6 +90,7 @@ function getNearestBusstops() {
 }
 
 function markNearbyBusstops(results, status, xhr) {
+    console.log(results);
     var tempMarker;
     clearMarkers();
     busstopCoords = JSON.parse(results);
@@ -154,7 +155,7 @@ function showPosition(position) {
     curUserLocation = pos;
     map.setCenter(pos);
     curLocationMarker.setPosition(pos);
-    getNearestBusstops();
+    getNearbyBusstops();
 }
 
 // Log any error to the console

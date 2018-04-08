@@ -7,7 +7,7 @@ require_once(__DIR__.'/../MapperAbstract.php');
 
 class DB extends SQLite3{
   function __construct() {
-    $this->open('BusFeed.db');
+    $this->open($_SERVER["DOCUMENT_ROOT"] . '/busfeed/model/datamapper/sqlite/BusFeed.db');
   }
 }
 

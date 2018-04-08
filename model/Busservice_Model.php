@@ -1,7 +1,6 @@
 <?php
-
-
 require_once('DomainObjectAbstract.php');
+require_once('datamapper/sqlite/BusserviceMapper_sqlite.php');
 
 class Busservice extends DomainObjectAbstract{
 
@@ -17,6 +16,16 @@ class Busservice extends DomainObjectAbstract{
     private $PM_Peak_Freq;
     private $PM_Offpeak_Freq;
     private $loopDesc;
+
+    public static function retrieveBusService($serviceNo,$direction) {
+        $mapper = new BusserviceMapper_sqlite();
+        return $mapper->getByServiceNoDirection($serviceNo,$direction);
+    }
+
+    public static function retrieveAllBusServices() {
+        $mapper = new BusserviceMapper_sqlite();
+        return $mapper->getAllBusservice();
+    }
 
     // Methods
     public function JsonSerialize(){
@@ -34,12 +43,6 @@ class Busservice extends DomainObjectAbstract{
             'loopDesc' => $this->getLoopDesc(),
         ];
     }
-
-    // Returns all information in array format
-    public function getInformationArray() {
-
-    }
-
     // Mutators
 
     public function setServiceNo($info){
@@ -133,5 +136,4 @@ class Busservice extends DomainObjectAbstract{
       return $this->loopDesc;
     }
 }
-
 ?>
