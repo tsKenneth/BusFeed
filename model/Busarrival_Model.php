@@ -1,5 +1,4 @@
 <?php
-
 require_once('DomainObjectAbstract.php');
 
 
@@ -8,8 +7,6 @@ require_once('DomainObjectAbstract.php');
  */
 
 class Busarrival extends DomainObjectAbstract{
-
-
   //Properties
   private $originCode;
   private $destinationCode;

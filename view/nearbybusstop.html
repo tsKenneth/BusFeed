@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-
     <title>BusFeed</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -16,6 +15,24 @@
 
 <body>
     <div class="container-fluid">
+        <div id="nearbyModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Bus Arrival Timings:</h4>
+                </div>
+                <div id="modalText" class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row" id="header">
             <img src="img/logo.png" class="img-fluid" alt="logo">
             <h1>&nbspBusFeed</h1>
@@ -42,9 +59,9 @@
     </div>
 
 <script src="js/nearbybusstop.js"></script>
-<script>window.scrollTo(0,1);</script>    
+<script>window.scrollTo(0,1);</script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initPage">
 </script>
 </body>
 </html>

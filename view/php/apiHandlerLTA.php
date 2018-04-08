@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 // gets the Bus Arrival Information from LTA DataMall
 // serviceno is optional. If serviceno == 0, retrieve information about all the bus services at the busstop
-function APIBusArr($busstopcode, $serviceno){
+function APIBusArrival($busstopcode, $serviceno){
   //Authentication Parameters
   $headers = [
       "AccountKey" => "+yuVbNT4QnOGQw5ALCTntA==",

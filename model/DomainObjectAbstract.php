@@ -1,9 +1,4 @@
 <?php
-
-
-
-
-
 abstract class DomainObjectAbstract implements JsonSerializable
 {
     protected $_id = null;

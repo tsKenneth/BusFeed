@@ -119,6 +119,35 @@ class BusrouteMapper_sqlite extends MapperAbstract_sqlite{
       }
     }
 
+    // find all bus routes at a particular busstop
+    // returns an array of Bus Route objects
+    public function getRoutesFromBusStop($busStopCode){
+      $db = new DB();
+      $bscode = $busStopCode;
+      $iter = 0;
+      $brArr = array();
+
+      $sql = "SELECT serviceno, operator, direction, stopsequence, busstopcode, distance, wdfirstbus, wdlastbus, satfirstbus, satlastbus, sunfirstbus, sunlastbus
+              FROM busroutes
+              WHERE busstopcode = :bscode";
+      $stmt = $db->prepare($sql);
+      $stmt->bindValue(':bscode', $bscode, SQLITE3_INTEGER);
+      $res = $stmt->execute();
+
+      $rowArray = array();
+      while($row = $res->fetchArray(SQLITE3_ASSOC)){
+        array_push($rowArray, $row);
+      }
+      foreach($rowArray as $data){
+        $brArr[$iter] = $this->create($data);
+        $iter = $iter + 1;
+      }
+
+      $db->close();
+
+      return $brArr;
+    }
+
     // find a full bus route by its serviceNo and direction
     // returns a 2D array of Bus Route objects
     public function getRouteFull($serviceNo, $direction){

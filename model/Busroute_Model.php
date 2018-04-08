@@ -1,8 +1,7 @@
 <?php
-
-
 require_once('DomainObjectAbstract.php');
 require_once('Busarrival_Model.php');
+require_once('../view/php/apiHandlerLTA.php');
 
 
 class Busroute extends DomainObjectAbstract {
@@ -60,8 +59,7 @@ class Busroute extends DomainObjectAbstract {
 
       $contentArr = (json_decode($json))->Services;
       $content = $contentArr[0];
-      print_r($content);
-
+      
       $arrivalArr = array($arrival1,$arrival2,$arrival3);
       $nextBusArr = array('NextBus', 'NextBus2', 'NextBus3');
       $iter = 0;
@@ -79,7 +77,7 @@ class Busroute extends DomainObjectAbstract {
         $arrivalArr[$iter]->setArrivalMinute($content->$nextBus->EstimatedArrival);
         $iter = $iter + 1;
       }
-
+      array_push($arrivalArr,$sNo);
       return $arrivalArr;
     }
 

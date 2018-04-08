@@ -3,7 +3,7 @@
 <head>
     <title>BusFeed</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -21,7 +21,9 @@
         </div>
 
         <div class="row" id="content">
-            <div id="map"></div>
+            <input type="text" id="filterbox" class="form-control"
+            placeholder="Destination...">
+            <div id="map2"></div>
         </div>
 
         <div class="row" id="navigationFooter">
@@ -40,21 +42,9 @@
         </div>
     </div>
 
-<script>
-      function initMap() {
-        var ntu = {lat: 1.3480513, lng: 103.6780874};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: ntu
-        });
-        var marker = new google.maps.Marker({
-          position: ntu,
-          map: map
-        });
-      }
-</script>
+<script src="js/routeplanning.js"></script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initPage&libraries=places">
 </script>
 </body>
 </html>
