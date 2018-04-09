@@ -21,17 +21,17 @@ class Busroute extends DomainObjectAbstract {
     private $SUN_FirstBus;
     private $SUN_LastBus;
 
-    public static function retrieveBusroute($serviceNo, $direction, $busStopCode) {
+    public static function retrieveBusroute(string $serviceNo,string $direction,string $busStopCode) {
         $mapper = new BusrouteMapper_sqlite();
         return $mapper->getRouteStop($serviceNo, $direction, $busStopCode);
     }
 
-    public static function retrieveRouteFromBusstop($busStopCode) {
+    public static function retrieveRouteFromBusstop(string $busStopCode) {
         $mapper = new BusrouteMapper_sqlite();
         return $mapper->getRoutesFromBusStop($busStopCode);
     }
 
-    public static function retrieveAllBusRoute($serviceNo, $direction) {
+    public static function retrieveAllBusRoute(string $serviceNo, string $direction) {
         $mapper = new BusrouteMapper_sqlite();
         return $mapper->getRouteFull($serviceNo, $direction);
     }
@@ -59,14 +59,22 @@ class Busroute extends DomainObjectAbstract {
     public function getArrivalTimingsAPI(){
       $sNo = $this->getServiceNo();
       $bscode = $this->getBusStopCode();
+      $dir = $this->getDirection();
 
       $arrival1 = new Busarrival();
       $arrival2 = new Busarrival();
       $arrival3 = new Busarrival();
 
-      $json = APIBusArrival($bscode,$sNo);
+      $arrivalObj = new stdClass();
+      $arrivalObj->info = array("busStopCode"=>$bscode,"serviceNo"=>$sNo,"direction"=>$dir);
 
+      $json = APIBusArrival($bscode,$sNo);
       $contentArr = (json_decode($json))->Services;
+
+      if (empty($contentArr)) {
+          return $arrivalObj;
+      }
+
       $content = $contentArr[0];
 
       $arrivalArr = array($arrival1,$arrival2,$arrival3);
@@ -86,8 +94,10 @@ class Busroute extends DomainObjectAbstract {
         $arrivalArr[$iter]->setArrivalMinute($content->$nextBus->EstimatedArrival);
         $iter = $iter + 1;
       }
-      array_push($arrivalArr,$sNo);
-      return $arrivalArr;
+
+      $arrivalObj->arrivals = $arrivalArr;
+
+      return $arrivalObj;
     }
 
 

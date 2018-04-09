@@ -17,6 +17,9 @@ class Busservice extends DomainObjectAbstract{
     private $PM_Offpeak_Freq;
     private $loopDesc;
 
+    private $originName;
+    private $destinationName;
+
     public static function retrieveBusService($serviceNo,$direction) {
         $mapper = new BusserviceMapper_sqlite();
         return $mapper->getByServiceNoDirection($serviceNo,$direction);
@@ -25,6 +28,12 @@ class Busservice extends DomainObjectAbstract{
     public static function retrieveAllBusServices() {
         $mapper = new BusserviceMapper_sqlite();
         return $mapper->getAllBusservice();
+    }
+
+    public static function setBusServiceNames(){
+        $mapper = new BusserviceMapper_sqlite();
+        $mapper->setBusServiceNames();
+        return;
     }
 
     // Methods
@@ -41,6 +50,8 @@ class Busservice extends DomainObjectAbstract{
             'PM_Peak_Freq' => $this->getPM_Peak_Freq(),
             'PM_Offpeak_Freq' => $this->getPM_Offpeak_Freq(),
             'loopDesc' => $this->getLoopDesc(),
+            'originName' => $this->getOriginName(),
+            'destinationName' => $this->getDestinationName()
         ];
     }
     // Mutators
@@ -89,6 +100,14 @@ class Busservice extends DomainObjectAbstract{
       $this->loopDesc = $info;
     }
 
+    public function setOriginName($info){
+      $this->originName = $info;
+    }
+
+    public function setDestinationName($info){
+      $this->destinationName = $info;
+    }
+
 
     // Accessors
 
@@ -134,6 +153,14 @@ class Busservice extends DomainObjectAbstract{
 
     public function getLoopDesc() {
       return $this->loopDesc;
+    }
+
+    public function getOriginName() {
+      return $this->originName;
+    }
+
+    public function getDestinationName() {
+      return $this->destinationName;
     }
 }
 ?>

@@ -26,6 +26,8 @@ class BusserviceMapper_sqlite extends MapperAbstract_sqlite{
                     pmpeakfreq TEXT,
                     pmoffpeakfreq TEXT,
                     loopdescription TEXT,
+                    originname TEXT,
+                    destinationname TEXT,
                     PRIMARY KEY(serviceno, direction)
                     FOREIGN KEY(origincode) REFERENCES busstops(busstopcode) ON UPDATE CASCADE
                     FOREIGN KEY(destinationcode) REFERENCES busstops(busstopcode) ON UPDATE CASCADE
@@ -50,6 +52,8 @@ class BusserviceMapper_sqlite extends MapperAbstract_sqlite{
       $obj->setPMP($data['pmpeakfreq']);
       $obj->setPMO($data['pmoffpeakfreq']);
       $obj->setLoopDescription($data['loopdescription']);
+      $obj->setOriginName($data['originname']);
+      $obj->setDestinationName($data['destinationname']);
 
       return $obj;
     }
@@ -84,6 +88,32 @@ class BusserviceMapper_sqlite extends MapperAbstract_sqlite{
       return;
     }
 
+    function setBusServiceNames(){
+      $db = new DB();
+
+      $sql = "UPDATE busservices
+              SET originname = (SELECT description
+                                            FROM busstops
+                                            WHERE busstopcode = busservices.origincode)
+              where EXISTS (SELECT description
+                            FROM busstops
+                            WHERE busstopcode = busservices.origincode);";
+      $stmt = $db->prepare($sql);
+      $stmt->execute();
+      $sql = "UPDATE busservices
+              SET destinationname = (SELECT description
+                                                 FROM busstops
+                                                 WHERE busstopcode = busservices.destinationcode)
+              where EXISTS (SELECT description
+                            FROM busstops
+                            WHERE busstopcode = busservices.destinationcode);";
+      $stmt = $db->prepare($sql);
+      $stmt->execute();
+
+      $db->close();
+      return;
+    }
+
     // find a bus service by its service no and direction
     // returns a Bus Service object
     public function getByServiceNoDirection($serviceNo,$direction){
@@ -91,7 +121,7 @@ class BusserviceMapper_sqlite extends MapperAbstract_sqlite{
       $sNo = $serviceNo;
       $dir = $direction;
 
-      $sql = "SELECT serviceno, operator, direction, category, origincode, destinationcode, ampeakfreq, amoffpeakfreq, pmpeakfreq, pmoffpeakfreq, loopdescription
+      $sql = "SELECT serviceno, operator, direction, category, origincode, destinationcode, ampeakfreq, amoffpeakfreq, pmpeakfreq, pmoffpeakfreq, loopdescription, originname, destinationname
               FROM busservices
               WHERE serviceno = :sNo AND direction = :dir;";
       $stmt = $db->prepare($sql);
@@ -118,7 +148,7 @@ class BusserviceMapper_sqlite extends MapperAbstract_sqlite{
       $beArr = array();
       $iter = 0;
 
-      $sql = "SELECT serviceno, operator, direction, category, origincode, destinationcode, ampeakfreq, amoffpeakfreq, pmpeakfreq, pmoffpeakfreq, loopdescription
+      $sql = "SELECT serviceno, operator, direction, category, origincode, destinationcode, ampeakfreq, amoffpeakfreq, pmpeakfreq, pmoffpeakfreq, loopdescription, originname, destinationname
               FROM busservices;";
       $stmt = $db->prepare($sql);
       $res = $stmt->execute();

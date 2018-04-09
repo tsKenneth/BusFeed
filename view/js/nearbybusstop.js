@@ -29,7 +29,7 @@ function showBusArrivalModal(results, status, xhr) {
         <thead>
             <tr>
                 <th scope=\"col\">Bus Service No.</th>
-                <th scope=\"col\">Estimated Arrival Timing</th>
+                <th scope=\"col\">Estimated Arrival Timing [next 2nd 3rd] in minutes</th>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +38,12 @@ function showBusArrivalModal(results, status, xhr) {
     results.forEach(function(element){
         resultsDisplay += `<tr>
             <th scope=\"row\">${element.serviceNo}</th>
-            <td id="${element.serviceNo}">Estimated Time</td>
+            <td id="${element.serviceNo}"
+            data-serviceno="${element.serviceNo}"
+            data-busstopcode="${element.busStopCode}"
+            data-direction="${element.direction}"
+            onclick="refreshBusArrivalTiming(this)"
+            ">Click to get time</td>
         </tr>`;
         getBusArrivalTiming(element.busStopCode,
             element.serviceNo,element.direction);
@@ -48,7 +53,9 @@ function showBusArrivalModal(results, status, xhr) {
     document.getElementById("modalText").innerHTML = resultsDisplay;
 }
 
-
+function refreshBusArrivalTiming(e) {
+    getBusArrivalTiming($(e).data('busstopcode'), $(e).data('serviceno'), $(e).data('direction'));
+}
 function getBusArrivalTiming(busStopCode, serviceNo, direction) {
     var xmlhttp = new XMLHttpRequest();
     $.ajax({
@@ -64,17 +71,25 @@ function getBusArrivalTiming(busStopCode, serviceNo, direction) {
 
 function updateTimingModal(results, status, xhr) {
     var results = JSON.parse(results);
-    var arrTiming;
-    for (var i = 0; i < results.length-1; i++) {
-        if (results[0].arrivalMinute==0) {
-            arrTiming = "Arriving";
-        } else if(results[0].arrivalMinute<0) {
-            arrTiming = "Not in Operation";
-        } else {
-            arrTiming = results[0].arrivalMinute;
-        }
-        document.getElementById(results[results.length-1]).innerHTML = arrTiming;
+
+    if (!results.hasOwnProperty("arrivals")) {
+        document.getElementById(results.info.serviceNo).innerHTML = "Not in Operation";
+        return;
     }
+
+    var finalString = "";
+    var arrivals = results.arrivals;
+    for (var i = 0; i < arrivals.length; i++) {
+        if (arrivals[i].arrivalMinute==0) {
+            finalString += "Arriving";
+        } else if(arrivals[i].arrivalMinute<0) {
+            finalString += "";
+        } else {
+            finalString += arrivals[i].arrivalMinute;
+        }
+        finalString += " "
+    }
+    document.getElementById(results.info.serviceNo).innerHTML = finalString;
 }
 
 // Busstop Markers Section  ===================================================
@@ -90,7 +105,6 @@ function getNearbyBusstops() {
 }
 
 function markNearbyBusstops(results, status, xhr) {
-    console.log(results);
     var tempMarker;
     clearMarkers();
     busstopCoords = JSON.parse(results);

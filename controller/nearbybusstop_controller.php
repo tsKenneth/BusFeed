@@ -5,22 +5,6 @@ require_once("..\model\Busroute_Model.php");
 require_once("..\model\Busstop_Model.php");
 require_once("..\model\Busarrival_Model.php");
 
-if(isset($_GET['function'])) {
-    if($_GET['function']=="retrieveNearbyBusstop" && isset($_GET['pos'])) {
-        echo NearbyBusstop_Controller::retrieveNearbyBusstop($_GET['pos']);
-    } elseif($_GET['function']=="retrieveRoutesAtBusstop" && isset($_GET['busstopcode'])) {
-        echo NearbyBusstop_Controller::retrieveRoutesAtBusstop($_GET['busstopcode']);
-    } elseif($_GET['function']=="retrieveBusArrivalTiming"
-        && isset($_GET['busstopcode'])
-        && isset($_GET['serviceno'])
-        && isset($_GET['direction'])) {
-        echo NearbyBusstop_Controller::retrieveBusArrivalTiming($_GET['busstopcode'],$_GET['serviceno'],$_GET['direction']);
-    }
-    else {
-        echo "";
-    }
-}
-
 class NearbyBusstop_Controller
 {
     public static function retrieveBusArrivalTiming(string $busstopcode, string $serviceno, string $direction) {
@@ -40,4 +24,22 @@ class NearbyBusstop_Controller
         return strip_tags($results);
     }
 }
+
+if(isset($_GET['function'])) {
+    if($_GET['function']=="retrieveNearbyBusstop" && isset($_GET['pos'])) {
+        echo NearbyBusstop_Controller::retrieveNearbyBusstop($_GET['pos']);
+    } elseif($_GET['function']=="retrieveRoutesAtBusstop" && isset($_GET['busstopcode'])) {
+        echo NearbyBusstop_Controller::retrieveRoutesAtBusstop($_GET['busstopcode']);
+    } elseif($_GET['function']=="retrieveBusArrivalTiming"
+        && isset($_GET['busstopcode'])
+        && isset($_GET['serviceno'])
+        && isset($_GET['direction'])) {
+        echo NearbyBusstop_Controller::retrieveBusArrivalTiming($_GET['busstopcode'],$_GET['serviceno'],$_GET['direction']);
+    }
+    else {
+        echo "";
+    }
+}
+
+
 ?>

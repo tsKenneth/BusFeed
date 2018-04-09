@@ -157,7 +157,6 @@ class BusstopMapper_sqlite extends MapperAbstract_sqlite{
 
     protected function _create(){
         return new Busstop();
-
     }
 
     // receives a Bus Stop object

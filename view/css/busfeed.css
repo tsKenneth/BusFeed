@@ -3,6 +3,10 @@ html,body {
     height:100%;
 }
 
+#busServiceArrivalTable, #busStopArrivalTable {
+    max-height:20vh;
+}
+
 .container-fluid {
   height: 100vh;
   width: 100%;
@@ -14,13 +18,9 @@ html,body {
     color:white;
 }
 
-.modal-body {
+.modal, .modal-body {
     background-color:#343a40;
     color:white;
-}
-
-.table-responsive {
-    max-height:100%;
 }
 
 #map {
