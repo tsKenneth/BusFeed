@@ -1,0 +1,14 @@
+{
+  "short_name": "Busfeed",
+  "name": "Busfeed - A Singapore Bus Journey Planner Web Application",
+  "display": "standalone",
+  "background_color": "#CF5C3F",
+  "theme_color":"#CF5C3F",
+  "icons": [
+  {
+    "src": "img/icon-256x256.png",
+    "type": "image/png",
+    "sizes": "256x256"
+  }],
+  "start_url": "../index.html?launcher=true"
+}

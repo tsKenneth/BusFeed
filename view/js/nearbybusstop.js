@@ -154,7 +154,6 @@ function initMap() {
 // Watch the user's current location
 function getLocation() {
     if (navigator.geolocation) {
-
        var geoObject = navigator.geolocation.watchPosition(showPosition,
            handleError);
     }

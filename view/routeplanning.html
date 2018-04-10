@@ -1,49 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-    <title>BusFeed</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1">
-    <meta name="mobile-web-app-capable" content="yes">
+    <head>
+        <title>BusFeed</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/busfeed.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-</head>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/busfeed.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <link rel="manifest" href="manifest.json">
+    </head>
 
-<body>
-    <div class="container-fluid">
-        <div class="row" id="header">
-            <img src="img/logo.png" class="img-fluid" alt="logo">
-            <h1>&nbspBusFeed</h1>
+    <body>
+        <div class="container-fluid">
+            <div class="row" id="header">
+                <img src="img/logo.png" class="img-fluid" alt="logo">
+                <h1>&nbspBusFeed</h1>
+            </div>
+
+            <div class="row" id="content">
+                <input type="text" id="filterbox" class="form-control"
+                placeholder="Destination...">
+                <div id="map2"></div>
+            </div>
+
+            <div class="row" id="navigationFooter">
+                <div class="col navigationFooterButtons text-center" id="busstop">
+                    <a href="nearbybusstop.html"><img src="css/icons/Busstop.png" class="img-fluid" alt="Busstop" style="height:100%;"></a>
+                </div>
+                <div class="col navigationFooterButtons text-center" id="activeNav">
+                    <a href="routeplanning.html"><img src="css/icons/Route.png" class="img-fluid" alt="Route" style="height:100%;"></a>
+                </div>
+                <div class="col navigationFooterButtons text-center" id="information">
+                    <a href="information.html"><img src="css/icons/Information.png" class="img-fluid" alt="Information" style="height:100%;"></a>
+                </div>
+                <div class="col navigationFooterButtons text-center" id="bookmark">
+                    <a href="bookmarks.html"><img src="css/icons/Bookmark.png" class="img-fluid" alt="Bookmark" style="height:100%;"></a>
+                </div>
+            </div>
         </div>
 
-        <div class="row" id="content">
-            <input type="text" id="filterbox" class="form-control"
-            placeholder="Destination...">
-            <div id="map2"></div>
-        </div>
-
-        <div class="row" id="navigationFooter">
-            <div class="col navigationFooterButtons text-center" id="busstop">
-                <a href="nearbybusstop.html"><img src="css/icons/Busstop.png" class="img-fluid" alt="Busstop" style="height:100%;"></a>
-            </div>
-            <div class="col navigationFooterButtons text-center" id="activeNav">
-                <a href="routeplanning.html"><img src="css/icons/Route.png" class="img-fluid" alt="Route" style="height:100%;"></a>
-            </div>
-            <div class="col navigationFooterButtons text-center" id="information">
-                <a href="information.html"><img src="css/icons/Information.png" class="img-fluid" alt="Information" style="height:100%;"></a>
-            </div>
-            <div class="col navigationFooterButtons text-center" id="bookmark">
-                <a href="bookmarks.html"><img src="css/icons/Bookmark.png" class="img-fluid" alt="Bookmark" style="height:100%;"></a>
-            </div>
-        </div>
-    </div>
-
-<script src="js/routeplanning.js"></script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initPage&libraries=places">
-</script>
-</body>
+        <script src="js/routeplanning.js"></script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw0W2TkgO4TmBoATTf_gkmM5NfStpD6FE&callback=initPage&libraries=places">
+        </script>
+    </body>
 </html>

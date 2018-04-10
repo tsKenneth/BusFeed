@@ -74,18 +74,20 @@ class BusstopMapper_sqlite extends MapperAbstract_sqlite{
       $sql = "SELECT busstopcode, roadname, longitude, latitude, description
               FROM busstops
               WHERE busstopcode = :bscode;";
-      $stmt = $db->prepare($sql);
-      $stmt->bindValue(':bscode', $bscode, SQLITE3_TEXT);
-
-      $res = $stmt->execute();
+      if (!($stmt = $db->prepare($sql))){
+        return 'SQLITE statement failed to be prepared';
+      }
+      $stmt->bindValue(':bscode', $bscode, SQLITE3_INTEGER);
+      if (!($res = $stmt->execute())){
+        return 'SQLite statement failed to execute';
+      }
       $row = $res->fetchArray(SQLITE3_ASSOC);
-
       $db->close();
       if($row){
         return $this->create($row);
       }
       else {
-        echo('Row does not exist in database');
+        return 'Row does not exist in database';
       }
     }
 
@@ -134,12 +136,15 @@ class BusstopMapper_sqlite extends MapperAbstract_sqlite{
               haversine(longitude, latitude, :cLong, :cLat) AS distance
               FROM busstops
               WHERE distance < :maxdist;";
-      $stmt = $db->prepare($sql);
+      if(!($stmt = $db->prepare($sql))){
+          return 'SQLite statement failed to be prepared';
+      }
       $stmt->bindValue(':cLong', $cLong, SQLITE3_FLOAT);
       $stmt->bindValue(':cLat', $cLat, SQLITE3_FLOAT);
       $stmt->bindValue(':maxdist', $maxdist, SQLITE3_FLOAT);
-      $res = $stmt->execute();
-
+      if(!($res = $stmt->execute())){
+          return 'SQLite statement failed to execute';
+      }
       $rowArray = array();
       while($row = $res->fetchArray(SQLITE3_ASSOC)){
         array_push($rowArray, $row);
@@ -150,7 +155,14 @@ class BusstopMapper_sqlite extends MapperAbstract_sqlite{
       }
 
       $db->close();
-      return $bsArr;
+      if(empty($bsArr)){
+        return 'There are no Bus Stops that fits the criteria';
+      }
+      else{
+        return $bsArr;
+      }
+
+
     }
 
     // functions below can only be called by this class

@@ -1,5 +1,5 @@
-var busstopArray;
-var busServiceArray;
+var bookmarkedBusStopArray;
+var bookmarkedBusServiceArray;
 var busstopCookies;
 var busServiceCookies;
 
@@ -7,14 +7,16 @@ function initialiseTable() {
     busstopCookies = Cookies.get('busstop');
     busServiceCookies = Cookies.get('busservice');
 
-    retrieveBusstopList();
-    retrieveBusserviceList()
+    retrieveBusStopBookmarksList();
+    retrieveBusServiceBookmarksList();
+
     document.querySelector('#filterBox').addEventListener('keyup',
         filterBusstopTable, false);
     document.querySelector('#filterBox').addEventListener('keyup',
         filterBusserviceTable, false);
 }
 
+// Information Modal and Bus Arrival Information
 function toggleBusServiceBookmark() {
     $('#bookmarkButton').button('toggle');
     if ($('#bookmarkButton').attr('data-bookmarked') == "true") {
@@ -63,36 +65,36 @@ function toggleBusstopBookmark() {
         $('#bookmarkButton').attr('data-bookmarked','true');
         $('#bookmarkButton').text("Remove Bookmark");
     }
+
 }
 
-// Information Modal and Bus Arrival Information
 $('#informationModal').on('show.bs.modal', function(modal) {
     var modalType = modal.relatedTarget.dataset.type;
 
     if (modalType == "busstop") {
         var busstopCode = modal.relatedTarget.dataset.busstopcode;
-        for (var i=0; i < busstopArray.length; i++) {
-            if (busstopArray[i].busStopCode == busstopCode) {
+        for (var i=0; i < bookmarkedBusStopArray.length; i++) {
+            if (bookmarkedBusStopArray[i].busStopCode == busstopCode) {
                 var displayString = `
                 <p>
-                    <b>Busstop Code:</b> ${busstopArray[i].busStopCode} <br />
-                    <b>Road Name:</b> ${busstopArray[i].roadName} <br />
-                    <b>Description:</b> ${busstopArray[i].description} <br />
-                    <b>Latitude:</b> ${busstopArray[i].latitude} <br />
-                    <b>Longitude:</b> ${busstopArray[i].longitude} <br />
+                    <b>Busstop Code:</b> ${bookmarkedBusStopArray[i].busStopCode} <br />
+                    <b>Road Name:</b> ${bookmarkedBusStopArray[i].roadName} <br />
+                    <b>Description:</b> ${bookmarkedBusStopArray[i].description} <br />
+                    <b>Latitude:</b> ${bookmarkedBusStopArray[i].latitude} <br />
+                    <b>Longitude:</b> ${bookmarkedBusStopArray[i].longitude} <br />
                 </p>
                 <div id="busStopArrivalTable" class=\"table-responsive\">
                 </div>
                 <br/>
-                <button id="bookmarkButton" onclick="toggleBusstopBookmark()" data-busstopcode="${busstopArray[i].busStopCode}" data-toggle="button" data-bookmarked="false" class="btn btn-success" aria-pressed="true" autocomplete="off">Bookmark</button>
+                <button id="bookmarkButton" onclick="toggleBusstopBookmark()" data-busstopcode="${bookmarkedBusStopArray[i].busStopCode}" data-toggle="button" data-bookmarked="false" class="btn btn-success" aria-pressed="true" autocomplete="off">Bookmark</button>
                 `;
 
-                getFullBusStopRoute(busstopArray[i].busStopCode)
+                getFullBusStopRoute(bookmarkedBusStopArray[i].busStopCode)
                 document.getElementById("modalText").innerHTML = displayString;
 
                 var cookiesArr = JSON.parse(busstopCookies);
                 cookiesArr.forEach(function(element) {
-                    if(element == busstopArray[i].busStopCode) {
+                    if(element == bookmarkedBusStopArray[i].busStopCode) {
                         $('#bookmarkButton').button('toggle');
                         $('#bookmarkButton').text("Remove Bookmark");
                         $('#bookmarkButton').attr('data-bookmarked','true');
@@ -106,38 +108,38 @@ $('#informationModal').on('show.bs.modal', function(modal) {
         var serviceno = modal.relatedTarget.dataset.serviceno;
         var direction = modal.relatedTarget.dataset.direction;
         var resultsDisplay = ""
-        for (var i=0; i < busServiceArray.length; i++) {
-            if (busServiceArray[i].serviceNo == serviceno) {
+        for (var i=0; i < bookmarkedBusServiceArray.length; i++) {
+            if (bookmarkedBusServiceArray[i].serviceNo == serviceno) {
                 var displayString = `
                 <p>
-                    <b>Service Number:</b> ${busServiceArray[i].serviceNo} <br />
-                    <b>Operator:</b> ${busServiceArray[i].operator} <br />
-                    <b>Direction:</b> ${busServiceArray[i].direction} <br />
-                    <b>Category:</b> ${busServiceArray[i].category} <br />
-                    <b>AM Peak Frequency:</b> ${busServiceArray[i].AM_Peak_Freq} <br />
-                    <b>AM Offpeak Frequency:</b> ${busServiceArray[i].AM_Offpeak_Freq} <br />
-                    <b>PM Peak Frequency:</b> ${busServiceArray[i].PM_Peak_Freq} <br />
-                    <b>PM Offpeak Frequency:</b> ${busServiceArray[i].PM_Offpeak_Freq} <br />
-                    <b>Loop at:</b> ${busServiceArray[i].loopDesc} <br />
+                    <b>Service Number:</b> ${bookmarkedBusServiceArray[i].serviceNo} <br />
+                    <b>Operator:</b> ${bookmarkedBusServiceArray[i].operator} <br />
+                    <b>Direction:</b> ${bookmarkedBusServiceArray[i].direction} <br />
+                    <b>Category:</b> ${bookmarkedBusServiceArray[i].category} <br />
+                    <b>AM Peak Frequency:</b> ${bookmarkedBusServiceArray[i].AM_Peak_Freq} <br />
+                    <b>AM Offpeak Frequency:</b> ${bookmarkedBusServiceArray[i].AM_Offpeak_Freq} <br />
+                    <b>PM Peak Frequency:</b> ${bookmarkedBusServiceArray[i].PM_Peak_Freq} <br />
+                    <b>PM Offpeak Frequency:</b> ${bookmarkedBusServiceArray[i].PM_Offpeak_Freq} <br />
+                    <b>Loop at:</b> ${bookmarkedBusServiceArray[i].loopDesc} <br />
                 </p>
                 <div id="busServiceArrivalTable" class=\"table-responsive\">
                 </div>
                 <br/>
                 <button id="bookmarkButton" onclick="toggleBusServiceBookmark()"
-                data-direction="${busServiceArray[i].direction}"
-                data-serviceno="${busServiceArray[i].serviceNo}"
+                data-direction="${bookmarkedBusServiceArray[i].direction}"
+                data-serviceno="${bookmarkedBusServiceArray[i].serviceNo}"
                 data-toggle="button" data-bookmarked="false"
                 class="btn btn-success" aria-pressed="true"
                 autocomplete="off">Bookmark</button>
                 `;
 
-                getFullBusserviceRoute(busServiceArray[i].serviceNo,busServiceArray[i].direction);
+                getFullBusserviceRoute(bookmarkedBusServiceArray[i].serviceNo,bookmarkedBusServiceArray[i].direction);
                 document.getElementById("modalText").innerHTML = displayString;
 
                 var cookiesArr = JSON.parse(busServiceCookies);
                 cookiesArr.forEach(function(element) {
-                    if(element.serviceNo == busServiceArray[i].serviceNo
-                        && element.direction == busServiceArray[i].direction) {
+                    if(element.serviceNo == bookmarkedBusServiceArray[i].serviceNo
+                        && element.direction == bookmarkedBusServiceArray[i].direction) {
                         $('#bookmarkButton').button('toggle');
                         $('#bookmarkButton').text("Remove Bookmark");
                         $('#bookmarkButton').attr('data-bookmarked','true');
@@ -305,27 +307,40 @@ function updateTimingModalBusstop(results, status, xhr) {
 }
 
 // Results table section ======================================================
-function retrieveBusstopList() {
-    $.ajax({
-        url: '../controller/information_busstop_controller.php',
-        data: "function=retrieveAllInfo",
-        contentType: "application/json; charset=utf-8",
-        success: updateBusstopResultsTable
-    });
+function retrieveBusStopBookmarksList() {
+    if (busstopCookies) {
+        $.ajax({
+            url: '../controller/bookmarks_controller.php',
+            data: {function:"retrieveBusstopBookmarkInfo",
+                    usercookies: busstopCookies},
+            contentType: "application/json; charset=utf-8",
+            success: updateBusstopResultsTable
+        });
+    }
+
 }
 
-function retrieveBusserviceList() {
-    $.ajax({
-        url: '../controller/information_busservice_controller.php',
-        data: "function=retrieveAllInfo",
-        contentType: "application/json; charset=utf-8",
-        success: updateBusServiceResultsTable
-    });
+function retrieveBusServiceBookmarksList() {
+    if (busServiceCookies) {
+        $.ajax({
+            url: '../controller/bookmarks_controller.php',
+            data: {function:"retrieveBusServiceBookmarkInfo",
+                    usercookies: busServiceCookies},
+            contentType: "application/json; charset=utf-8",
+            success: updateBusServiceResultsTable
+        });
+    }
 }
 
 function filterBusstopTable(event) {
     var filter = event.target.value.toUpperCase();
-    var rows = document.querySelector("#busstopTable tbody").rows;
+
+    if (document.querySelector("#busstopTable tbody").rows) {
+        var rows = document.querySelector("#busstopTable tbody").rows;
+    } else {
+        return;
+    }
+
 
     for (var i = 0; i < rows.length; i++) {
         var busstopCodeCol = rows[i].cells[0].textContent.toUpperCase();
@@ -342,7 +357,14 @@ function filterBusstopTable(event) {
 
 function filterBusserviceTable(event) {
     var filter = event.target.value.toUpperCase();
-    var rows = document.querySelector("#busServiceTable tbody").rows;
+
+    if(document.querySelector("#busServiceTable tbody").rows) {
+        var rows = document.querySelector("#busServiceTable tbody").rows;
+    } else {
+        return;
+    }
+
+
 
     for (var i = 0; i < rows.length; i++) {
         var busServiceNoCol = rows[i].cells[0].textContent.toUpperCase();
@@ -386,7 +408,7 @@ function updateBusServiceResultsTable(results, status, xhr) {
         </table>
     </div>
     `
-    busServiceArray = resultsArray;
+    bookmarkedBusServiceArray = resultsArray;
     document.getElementById("busservice").innerHTML = tableString;
 }
 
@@ -422,6 +444,6 @@ function updateBusstopResultsTable(results, status, xhr) {
     </div>
     `
 
-    busstopArray = resultsArray;
+    bookmarkedBusStopArray = resultsArray;
     document.getElementById("busstop").innerHTML = tableString;
 }

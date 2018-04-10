@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <title>BusFeed</title>
+        <script src="js/js.cookie.js"></script>
+    </head>
+    <body>
+        Cookies Set!
+        <script type="text/javascript">
+            var testArrayObj =[{serviceNo:"119",direction:"1"},
+                {serviceNo:"2",direction:"1"},
+                {serviceNo:"2",direction:"2"}]
+
+            var arrString = JSON.stringify(testArrayObj);
+            Cookies.set('busservice',arrString);
+
+            var arrString2 = ["67141","67139"]
+            Cookies.set('busstop',arrString2);
+
+        </script>
+    </body>
+</html>

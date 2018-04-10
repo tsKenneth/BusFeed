@@ -1,18 +1,60 @@
 <?php
-class Bookmarks_Controller
 require_once("..\model\Busservice_Model.php");
 require_once("..\model\Busroute_Model.php");
 require_once("..\model\Busstop_Model.php");
-require_once("..\model\Busarrival_Model.php");
 
+class Bookmarks_Controller
 {
-    public function addBusServiceBookmark(Object $user, Object $busService);
-    public function removeBusServiceBookmark(Object $user, Object $busService);
-    public function addBusstopBookmark(Object $user, Object $busStop);
-    public function removeBusstopBookmark(Object $user, Object $busStop);
+    public static function retrieveBusServiceBookmarkInfo(string $userData) {
+        $userDataArr = json_decode($userData);
+        $resultsArr = Busservice::retrieveAllBusServices();
+        $filteredArr = array();
+        foreach ($resultsArr as $key => $value) {
+            foreach($userDataArr as $index => $busService) {
+                if($value->getServiceNo() == $busService->serviceNo
+                    && $value->getDirection() == $busService->direction) {
+                    array_push($filteredArr,$value);
+                }
+            }
+        }
+        $results = json_encode($filteredArr);
+        return (strip_tags($results));
+    }
+    public static function retrieveBusstopBookmarkInfo(string $userData) {
+        $userDataArr = json_decode($userData);
+        $resultsArr = Busstop::retrieveAllBusstops();
+        $filteredArr = array();
+        foreach ($resultsArr as $key => $value) {
+            foreach($userDataArr as $index => $busstop) {
+                if($value->getBusstopCode() == $busstop) {
+                    array_push($filteredArr,$value);
+                }
+            }
+        }
+        $results = json_encode($filteredArr);
+        return (strip_tags($results));
+    }
 
-    public function retrieveBusServiceBookmarks (Object $user);
-    public function retrieveBusstopBookmarks (Object $user);
+    public static function retrieveBusArrivalTiming(string $busstopcode, string $serviceno, string $direction) {
+        $results = Busroute::retrieveBusroute($serviceno, $direction, $busstopcode);
+        $resultsArrivalTiming = json_encode($results->getArrivalTimingsAPI());
+        return strip_tags($resultsArrivalTiming);
+    }
+}
+
+if(isset($_GET['function'])) {
+    if($_GET['function'] == 'retrieveBusServiceBookmarkInfo' && isset($_GET['usercookies'])) {
+        echo Bookmarks_Controller::retrieveBusServiceBookmarkInfo($_GET['usercookies']);
+    }elseif($_GET['function'] == 'retrieveBusstopBookmarkInfo' && isset($_GET['usercookies'])) {
+        echo Bookmarks_Controller::retrieveBusstopBookmarkInfo($_GET['usercookies']);
+    }elseif($_GET['function']=="retrieveBusArrivalTiming"
+        && isset($_GET['busstopcode'])
+        && isset($_GET['serviceno'])
+        && isset($_GET['direction'])) {
+        echo Information_Busservice_Controller::retrieveBusArrivalTiming($_GET['busstopcode'],$_GET['serviceno'],$_GET['direction']);
+    } else {
+        echo "";
+    }
 }
 
 ?>
