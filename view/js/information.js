@@ -20,6 +20,7 @@ function initialiseTable() {
 
     retrieveBusstopList();
     retrieveBusserviceList()
+
     document.querySelector('#filterBox').addEventListener('keyup',
         filterBusstopTable, false);
     document.querySelector('#filterBox').addEventListener('keyup',

@@ -16,9 +16,20 @@ html,body {
 .modal-footer, .modal-header {
     background-color:#CF5C3F;
     color:white;
+    padding: 7px 10px 7px 10px;
+}
+.modal-header {
+    border-radius: 0.5rem 0.5rem 0 0
+}
+.modal-footer{
+    border-radius: 0 0 0.5rem 0.5rem
 }
 
-.modal, .modal-body {
+.modal-content {
+    vertical-align:center; !important;
+    border-radius: 0.5rem;
+}
+.modal-body {
     background-color:#343a40;
     color:white;
 }
@@ -43,7 +54,7 @@ html,body {
     background-color:#CF5C3F;
     opacity: 50;
     color: white;
-    text-shadow: 2px 2px red;
+    text-shadow: 2px 2px black;
 }
 
 #header img {
@@ -95,14 +106,13 @@ html,body {
 }
 
 #navigationFooter img{
-    padding: 7px;
     height: 100%;
     width: auto;
 }
 
 #activeNav {
     background: #1d2124;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     height: 7vh;
     margin: 0.5vh 5px 0px 5px;
     opacity: 0.8;
@@ -134,17 +144,66 @@ html,body {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    opacity: 0.5;
-    background-color: black;
+
+    background-color: #f29851;
+    opacity: 0.8;
     color: white;
 }
 
 .nav-pills .nav-link{
-    color:black;
+    color:white;
     font-weight: bold;
-    background-color: #d3d3d3;
+    opacity: 0.5;
+    background-color: #343a40;
+
 }
 
 .table tbody th{
     vertical-align: middle;
+}
+
+#busserviceTable{
+
+    border-radius: 0.5rem;
+    margin-bottom: 0px;
+}
+
+.table td, .table th{
+    border-top-style:none;
+}
+
+#busServiceArrivalTable {
+    border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    background-color: #ff8c73;
+}
+
+#bookmarkButton {
+    background-color: #f46949;
+    border-color: #f46949;
+    box-shadow:none;
+}
+
+#bookmarkButton:hover {
+    background-color: #CF5C3F;
+    border-color: #Cf5C3F;
+}
+
+.modal-dialog modal-lg {
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    height: 100vh;
 }
