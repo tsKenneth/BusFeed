@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <title>BusFeed</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+
+        <script src="js.cookie.js"></script>
+        <script type="text/javascript">
+            function testInvalidJSONEmptyObjectBusstop() {
+                var tempArray = JSON.stringify({})
+                Cookies.set('busstop',tempArray);
+                document.getElementById("result").innerHTML = "busstop:" + tempArray;
+            }
+
+            function testInvalidJSONEmptyObjectBusService() {
+                var tempArray = JSON.stringify('   ')
+                Cookies.set('busservice',tempArray);
+                document.getElementById("result").innerHTML = "busservice:" + tempArray;
+            }
+
+            function testValidJSONPopulatedBusstop() {
+                var tempArray1 = JSON.stringify(["67141","67139","1112"]);
+                Cookies.set('busstop',tempArray1);
+                document.getElementById("result").innerHTML = "busstop:" + tempArray1;
+            }
+
+            function testValidJSONPopulatedBusService() {
+                var tempArray2 = JSON.stringify([{serviceNo:"119",direction:"1"},{serviceNo:"189",direction:"1"},{serviceNo:"179",direction:"1"}]);
+                Cookies.set('busservice',tempArray2);
+                document.getElementById("result").innerHTML = "busservice:" + tempArray2;
+            }
+        </script>
+    </head>
+    <body>
+      <button onclick="testInvalidJSONEmptyObjectBusstop()" type="button">Invalid JSON Empty Object Busstop</button>
+      <br />
+      <button onclick="testInvalidJSONEmptyObjectBusService()" type="button">Invalid JSON Empty Object Bus Service</button>
+      <br />
+      <button onclick="testValidJSONPopulatedBusstop()" type="button">Valid JSON Populated Busstop</button>
+      <br />
+      <button onclick="testValidJSONPopulatedBusService()" type="button">Valid JSON Populated Bus Service</button>
+      <br />
+      <div id="result">Results</div>
+    </body>
+</html>
