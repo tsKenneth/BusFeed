@@ -4,8 +4,19 @@ var busstopCookies;
 var busServiceCookies;
 
 function initialiseTable() {
-    busstopCookies = Cookies.get('busstop');
-    busServiceCookies = Cookies.get('busservice');
+    if (Cookies.get('busstop')){
+        busstopCookies = Cookies.get('busstop');
+    } else {
+        busstopCookies = [];
+        Cookies.set('busstop',[]);
+    }
+
+    if (Cookies.get('busservice')){
+        busServiceCookies =  Cookies.get('busservice');
+    } else {
+        busServiceCookies = [];
+        Cookies.set('busservice',[]);
+    }
 
     retrieveBusStopBookmarksList();
     retrieveBusServiceBookmarksList();
