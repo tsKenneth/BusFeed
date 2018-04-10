@@ -1,9 +1,7 @@
 <?php
 include 'information_controller.php';
-require_once("..\model\Busservice_Model.php");
 require_once("..\model\Busroute_Model.php");
 require_once("..\model\Busstop_Model.php");
-require_once("..\model\Busarrival_Model.php");
 
 class Information_Busstop_Controller implements iInformation_controller
 {
