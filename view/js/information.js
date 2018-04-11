@@ -218,7 +218,7 @@ function updateBusServiceArrivalTable(results, status, xhr) {
     <thead>
         <tr>
             <th scope=\"col\">Order</th>
-            <th scope=\"col\">Bus Stop Code</th>
+            <th scope=\"col\">Bus Stop</th>
             <th scope=\"col\">Estimated Arrival Timing [next 2nd 3rd] in minutes</th>
         </tr>
     </thead>

@@ -155,7 +155,10 @@ function initMap() {
 function getLocation() {
     if (navigator.geolocation) {
        var geoObject = navigator.geolocation.watchPosition(showPosition,
-           handleError);
+           handleError,options = {
+               enableHighAccuracy: true
+           }
+       );
     }
 }
 
